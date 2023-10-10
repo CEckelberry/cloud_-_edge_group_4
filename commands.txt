@@ -1,0 +1,4 @@
+sed \
+    -e 's/{{TOPIC}}/group4/g' \
+    -e "s/{{GROUP_ID}}/"$(cat /proc/sys/kernel/random/uuid | tr -d "-")"/g" < ./consumer_template.yml \
+    | kubectl apply -f -
