@@ -6,4 +6,6 @@ COPY ./auth /app
 COPY consumer.py /app
 RUN pip install confluent_kafka click fastavro
 
-CMD ["python3", "consumer.py"]
+VOLUME [ "/app" ]
+
+ENTRYPOINT ["python3", "-u"]

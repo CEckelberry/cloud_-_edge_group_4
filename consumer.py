@@ -4,6 +4,8 @@ import io
 import signal
 from fastavro import reader
 
+print("script is running!")
+
 c = Consumer({
     'bootstrap.servers': '13.49.128.80:19093,13.49.128.80:29093,13.49.128.80:39093',
     'group.id': 'group4',
@@ -15,6 +17,8 @@ c = Consumer({
     'enable.auto.commit': 'true',
     'ssl.endpoint.identification.algorithm': 'none',
 })
+
+print("consumer created!")
 
 
 def signal_handler(sig, frame):
