@@ -12,8 +12,15 @@ spec:
       labels:
         app: consumer
     spec:
+      volumes:
+      - name: app
+        persistentVolumeClaim:
+          claimName: app-pvc
       containers:
       - name: consumer
-        image: consumer:latest
+        image: consumer
+        args: ["consumer.py", "group4"]
         imagePullPolicy: Never
-        command: ["consumer.py", "group4"]
+        volumeMounts:
+        - name: app
+          mountPath: /app

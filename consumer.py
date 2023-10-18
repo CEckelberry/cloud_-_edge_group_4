@@ -36,20 +36,23 @@ def consume(topic: str):
         [topic],
         on_assign=lambda _, p_list: print(p_list)
     )
-    while True:
-        msg = c.poll(1.0)
-        if msg is None:
-            continue
-        if msg.error():
-            print("Consumer error: {}".format(msg.error()))
-            continue
-        # headers = msg.headers()
+    try:
+        while True:
+            msg = c.poll(1.0)
+            if msg is None:
+                continue
+            if msg.error():
+                print("Consumer error: {}".format(msg.error()))
+                continue
+            # headers = msg.headers()
 
-        message_bytes = io.BytesIO(msg.value())
-        avro_schema = reader(message_bytes)
-        print(msg.headers()[0][1].decode("utf-8"))
-        for i in avro_schema:
-            print(i)
+            message_bytes = io.BytesIO(msg.value())
+            avro_schema = reader(message_bytes)
+            print(msg.headers()[0][1].decode("utf-8"))
+            for i in avro_schema:
+                print(i)
+    except Exception as e:
+        print(e)
 
 
 consume()

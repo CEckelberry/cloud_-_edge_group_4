@@ -1,11 +1,18 @@
 sed \
     -e 's/{{TOPIC}}/group4/g' \
-    -e "s/{{GROUP_ID}}/"$(cat /proc/sys/kernel/random/uuid | tr -d "-")"/g" < ./consumer_template.yml \
+    -e "s/{{GROUP_ID}}/"$(cat /proc/sys/kernel/random/uuid | tr -d "-")"/g" < ./consumer.yaml \
     | kubectl apply -f -
 
 
+#docker commands
 docker build -t consumer .
-
 docker run -i consumer consumer.py "group4"
-
 assignment/start-producer.sh group4 
+
+#main yaml apply
+kubectl apply -f consumer.yaml
+kubectl delete -f consumer.yaml
+
+#storage apply
+kubectl apply -f app-pv.yaml
+kubectl apply -f app-pvc.yaml
