@@ -8,4 +8,4 @@ RUN pip install confluent_kafka click fastavro
 
 VOLUME [ "/app" ]
 
-ENTRYPOINT ["python3", "-u"]
+ENTRYPOINT ["python3", "-u", "consumer.py", "group4"]

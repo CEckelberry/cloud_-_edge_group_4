@@ -9,4 +9,4 @@ spec:
   capacity:
     storage: 1Gi
   hostPath:
-    path: /home/ubuntu/assignment/consumer
+    path: /home/ubuntu/assignment/consumer/
